@@ -1,12 +1,8 @@
-import { useState } from "react";
-
-const Card = ({card, handleChoice}) => {
-    const [flipped, setFlipped] = useState(false);
+const Card = ({card, handleChoice,flipped}) => {
 
     const handleClick = () => {
         console.log(`Card clicked: ${card.id}`);
         console.log(`Flipped state: ${!flipped}`);
-        setFlipped(!flipped);
         handleChoice(card);
     }
 
