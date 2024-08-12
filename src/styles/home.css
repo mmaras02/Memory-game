@@ -1,9 +1,16 @@
 .home-container, .home-content {
     height: 100%;
     width: 100%;
+    background-color: rgb(63, 30, 92);
+    color: rgb(199, 199, 199);
 }
+
 .home-container h1{
-    margin-bottom: 8vh;
+    margin-bottom: 3vh;
+}
+
+.home-container p{
+    margin-bottom: 5vh;
 }
 
 .home-container {
@@ -26,13 +33,15 @@
     position: relative;
     display: flex;
     align-items: center;
-    justify-content: center
-  }
+    justify-content: center;
+}
 
 .card img {
     width: auto;
     height: 100%;
     position: absolute;
+    box-shadow: 8px 8px 10px 0px rgba(0, 0, 0, 0.4);
+    border-radius: 14px;
 }
   
 .card .front {
