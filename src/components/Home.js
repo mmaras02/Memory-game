@@ -9,10 +9,9 @@ const Home = () => {
         {level:1, cardCount:4 },
         {level:2, cardCount:10 },
         {level:3, cardCount:16 },
-        {level:4, cardCount:20 },
+        {level:4, cardCount:24 },
         {level:5, cardCount:30 },
     ]
-    const [cardCount,setCardCount] = useState(0);
 
     const handleLevelClick = (level) => {
         console.log("chosen level:",level.level);

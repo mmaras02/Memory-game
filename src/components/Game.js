@@ -77,11 +77,20 @@ const Game = () => {
         }
     }
 
+    const calculateColumns = () => {
+        if(cardCount==4) return 4;
+        else if (cardCount == 10) return 5;
+        else if(cardCount==16) return 8;
+        else if (cardCount == 24) return 8;
+        else if(cardCount==30) return 10;
+    };
+    
+
     return ( 
         <div className="game-container">
             <h1>Memory game</h1>
             <p>Number of guesses: {numOfGuesses}</p>
-            <div className="game-content">
+            <div className="game-content" style={{ gridTemplateColumns: `repeat(${calculateColumns()}, 1fr)` }}>
                 {cards && cards.map(card=>(
                     <Card key={card.uniqueId} card={card} handleChoice={handleChoice} flipped={firstChoice===card || secondChoice===card || matchedCards.includes(card.card)}/>
                 ))}
