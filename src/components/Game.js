@@ -1,22 +1,24 @@
 import useFetch from './useFetch';
 import { useEffect, useState } from "react";
-import "./styles/home.css";
+import "../styles/game.css";
 import Card from './Card';
+import { useNavigate, useLocation } from 'react-router-dom';
 
-const Home = () => {
+const Game = () => {
+    const navigate = useNavigate();
+    const location = useLocation();
+    const cardCount = location.state?.cardCount;
     let {data:allCards} = useFetch('http://localhost:8000/cards');
     const [cards,setCards] = useState([]);
     const [firstChoice,setFirstChoice] = useState([]);
     const [secondChoice,setSecondChoice] = useState([]);
     const [matchedCards,setMatchedCards] = useState([]);
-    //have to make counter how many times we guessed
     const [numOfGuesses,setNumOfGuesses] = useState(0);
-    const [disable,setDisable] = useState(false);//false-moze se klikat //true-disable further clicks
-    //if all the cards are open and matched then you cant click on them anymore and it says level passed or som
+    const [disable,setDisable] = useState(false);
 
     useEffect(()=>{
         if(allCards){
-            const shuffledCards = allCards.sort(() => Math.random() - 0.5).slice(0,5);
+            const shuffledCards = allCards.sort(() => Math.random() - 0.5).slice(0,cardCount/2);
             const duplicateCards=[...shuffledCards,...shuffledCards].map((card, index) => ({
                 ...card, 
                 uniqueId: `${card.id}-${index}`
@@ -71,15 +73,15 @@ const Home = () => {
 
         if (matchedCards.length === cards.length / 2 && cards.length > 0 ){
             alert(`You guessed all the cards!\nTotal score: ${numOfGuesses}`);
-            //new game button?
+            navigate("/");
         }
     }
 
     return ( 
-        <div className="home-container">
+        <div className="game-container">
             <h1>Memory game</h1>
             <p>Number of guesses: {numOfGuesses}</p>
-            <div className="home-content">
+            <div className="game-content">
                 {cards && cards.map(card=>(
                     <Card key={card.uniqueId} card={card} handleChoice={handleChoice} flipped={firstChoice===card || secondChoice===card || matchedCards.includes(card.card)}/>
                 ))}
@@ -87,5 +89,4 @@ const Home = () => {
         </div>
      );
 }
- 
-export default Home;
+export default Game;
